@@ -5,10 +5,16 @@
 
 Next.js box starter for EasyPanel. Supports all Next.js features. See also [Next.js with Docker for EasyPanel](https://github.com/digitalandyeu/next-with-docker)
 
-- Supports `public` directory and **images optimization**
-- Choose between **node.js server** or `standalone` build
+![preview.png](preview.png)
 
-## Node.js Server (Recommended)
+- Supports `public` directory and **images optimization**
+- **Supports all Next.js features**
+- Auto **git-deployments** and **CI/CD** and more
+- Automatic **SSL** and certificates management
+
+Choose between `node.js` server or `standalone` build
+
+### Node.js Server
 
 Next.js can be deployed to any hosting provider that supports Node.js. Ensure your `package.json` file has the following
 scripts:
@@ -23,7 +29,7 @@ scripts:
 }
 ```
 
-## Standalone setup
+### Standalone (Recommended)
 
 To use this box as a standalone app, you need to add a `next.config.js` file to the root of your project with the following content:
 
@@ -36,19 +42,61 @@ const nextConfig = {
 export default nextConfig;
 ```
 
-Modify the npm scripts in `package.json` to use `node ./.next/standalone/server.js` instead of `next start` and copy the `public` and `static` directories to the `.next/standalone` directory:
+Modify the npm scripts in `package.json` to use for standalone build:
 
 ```json
 {
   "dev": "next dev",
   "build": "next build",
   "lint": "next lint",
-  "start": "node ./.next/standalone/server.js",
+  "start": "node ./.next/standalone/server.js"
+}
+```
+
+Add the following scripts to `package.json` to copy the public and static directories to the standalone build:
+
+```json
+{
   "postbuild": "npm-run-all -s export:*",
   "export:public": "cp -r ./public ./.next/standalone",
   "export:static": "cp -r ./.next/static ./.next/standalone/.next"
 }
 ```
+
+## Local docker development
+
+```bash
+docker build -t nextjs-easypanel-box -f ./Dockerfile .
+docker run -p 3000:3000 nextjs-easypanel-box
+```
+
+## EasyPanel configuration
+
+Create a new box from GitHub repository.
+
+### Deployment Script
+
+Note, the npm ci command is used to install dependencies. This command is faster and more reliable than npm install.
+
+```bash
+cd /code
+npm ci
+npm run build
+supervisorctl restart nodejs-server
+```
+
+### Processes script
+
+Create a new process to run npm start.
+
+Name: `nodejs-server` process  
+Directory: `/code` (or `/code/.next/standalone`)  
+Command: `npm run start`  
+
+### Node.js
+
+- **Node.js version**: 18
+- Yarn / pnpm: **Disabled**
 
 ---
 
