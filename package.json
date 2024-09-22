@@ -8,10 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "start": "node ./.next/standalone/server.js",
-    "postbuild": "npm-run-all -s export:*",
-    "export:public": "cp -r ./public ./.next/standalone",
-    "export:static": "cp -r ./.next/static ./.next/standalone/.next"
+    "start": "next start"
   },
   "dependencies": {
     "next": "14.2.13",
