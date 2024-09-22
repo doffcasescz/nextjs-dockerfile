@@ -5,8 +5,50 @@
 
 Next.js box starter for EasyPanel. Supports all Next.js features. See also [Next.js with Docker for EasyPanel](https://github.com/digitalandyeu/next-with-docker)
 
-- Utilizes next `standalone` output
 - Supports `public` directory and **images optimization**
+- Choose between **node.js server** or `standalone` build
+
+## Node.js Server (Recommended)
+
+Next.js can be deployed to any hosting provider that supports Node.js. Ensure your `package.json` file has the following
+scripts:
+
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}
+```
+
+## Standalone setup
+
+To use this box as a standalone app, you need to add a `next.config.js` file to the root of your project with the following content:
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: "standalone"
+};
+
+export default nextConfig;
+```
+
+Modify the npm scripts in `package.json` to use `node ./.next/standalone/server.js` instead of `next start` and copy the `public` and `static` directories to the `.next/standalone` directory:
+
+```json
+{
+  "dev": "next dev",
+  "build": "next build",
+  "lint": "next lint",
+  "start": "node ./.next/standalone/server.js",
+  "postbuild": "npm-run-all -s export:*",
+  "export:public": "cp -r ./public ./.next/standalone",
+  "export:static": "cp -r ./.next/static ./.next/standalone/.next"
+}
+```
 
 ---
 
