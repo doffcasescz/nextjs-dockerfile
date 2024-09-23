@@ -3,7 +3,7 @@
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine) &nbsp;
 [![Github Badge](https://img.shields.io/github/followers/digitalandyeu?label=@digitalandyeu&style=social)](https://www.github.com/digitalandyeu)
 
-Next.js box starter for EasyPanel. Supports all Next.js features. See also [Next.js with Docker for EasyPanel](https://github.com/digitalandyeu/next-with-docker)
+Next.js box starter for EasyPanel. Supports all Next.js features. See also [Next.js with Docker for EasyPanel playground](https://github.com/digitalandyeu/next-with-docker)
 
 ![preview.png](preview.png)
 
@@ -66,8 +66,8 @@ Add the following scripts to `package.json` to copy the public and static direct
 ## Local docker development
 
 ```bash
-docker build -t nextjs-easypanel-box -f ./Dockerfile .
-docker run -p 3000:3000 nextjs-easypanel-box
+docker build -t nextjs-easypanel -f ./Dockerfile .
+docker run -p 3000:3000 nextjs-easypanel
 ```
 
 ## EasyPanel configuration

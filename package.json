@@ -1,8 +1,8 @@
 {
-  "name": "nextjs-easypanel-box",
+  "name": "nextjs-easypanel",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/digitalandyeu/nextjs-easypanel-box",
+  "homepage": "https://github.com/digitalandyeu/nextjs-easypanel",
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
