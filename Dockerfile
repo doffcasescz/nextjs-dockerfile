@@ -32,7 +32,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # RUN yarn build
 
 # If using npm comment out above and use below instead
-RUN npm run ci
+RUN npm ci
 
 # Production image, copy all the files and run next
 FROM base AS runner
